@@ -25,7 +25,7 @@ def getAll():
     with connection:
         with connection.cursor() as cursor:
             cursor.execute("SELECT bezeichnung, beschreibung, encode(thumbnailUrl, 'base64') FROM product")
-            product_id = cursor.fetchone()[0]
+            product_id = cursor.fetchone()[2]
     return {"id": product_id, "message": "Hat geklappt."}, 201
 
 @app.post("/api/room")
