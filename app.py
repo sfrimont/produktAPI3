@@ -23,7 +23,7 @@ def home():
 @app.get("/produkte")
 def getAll():
     with connection:
-        with connection.cursur() as cursor:
+        with connection.cursor() as cursor:
             cursor.execute("SELECT bezeichnung, beschreibung, encode(thumbnailUrl, 'base64') FROM product")
             product_id = cursor.fetchone()[0]
     return {"id": product_id, "message": "Hat geklappt."}, 201
