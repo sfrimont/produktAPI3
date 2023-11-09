@@ -18,6 +18,16 @@ connection = psycopg2.connect(url)
 @app.get("/")
 def home():
     return "Hello, world!"
+
+
+@app.get("/produkte")
+def getAll():
+    with connection:
+        with connection.cursur() as cursur:
+            cursor.execute("SELECT bezeichnung, beschreibung, encode(thumbnailUrl, 'base64') FROM product")
+            product_id = cursor.fetchone()[0]
+    return {"id": product_id, "message": "Hat geklappt."}, 201
+
 @app.post("/api/room")
 def create_room():
     data = request.get_json()
